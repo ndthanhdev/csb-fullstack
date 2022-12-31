@@ -11,7 +11,8 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -34,9 +35,12 @@ module.exports = {
   devServer: {
     port: 3000,
     open: true,
+    compress: true,
+    inline: true,
     proxy: {
       '/api': 'http://localhost:8000'
-    }
+    },
+    allowedHosts: ['.preview.csb.app']
   },
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
