@@ -38,7 +38,12 @@ module.exports = {
     compress: true,
     inline: true,
     proxy: {
-      '/api': 'http://localhost:8000'
+      '/api': 'http://localhost:8000',
+      '/socket.io': {
+        target: 'http://localhost:8000/socket.io',
+        ws: true,
+        changeOrigin: true
+      }
     },
     allowedHosts: ['.preview.csb.app']
   },
