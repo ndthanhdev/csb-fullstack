@@ -43,6 +43,11 @@ module.exports = {
         target: 'http://localhost:8000/socket.io',
         ws: true,
         changeOrigin: true
+      },
+      '/peerjs': {
+        target: 'http://localhost:8000/peerjs',
+        ws: true,
+        changeOrigin: true
       }
     },
     allowedHosts: ['.preview.csb.app']

@@ -41,20 +41,20 @@ function LoginForm() {
       }
 
       if(response.status === 403) {
-        setUserRegister({ errorMessage: 'Неверный логин или пароль!' });
+        setUserRegister({ errorMessage: '403' });
       }
     }
 
     const inputName = (e) => {
       const { value } = e.target;
       if(value.length >= 2) return clearError('login');
-      setError('login', 'notMatch', 'Имя должно быть больше или равно 2 символам');
+      setError('login', 'notMatch', 'notMatch login');
     }
 
     const inputPassword = (e) => {
       const { value } = e.target;
       if(value.length >= 5) return clearError('password');
-      setError('password', 'notMatch', 'Пароль должен быть больше или равно 5 символам');
+      setError('password', 'notMatch', 'notMatch password');
     }
 
     const formRender = () => {
@@ -64,10 +64,10 @@ function LoginForm() {
               Sign in
             </Typography>
             <form className="form" onSubmit={handleSubmit(submit)} >
-              <div><input className={classes.input} type="text" placeholder="Логин" name="login" required ref={register({ required: true })} onChange={inputName} /></div>
+              <div><input className={classes.input} type="text" placeholder="id" name="login" required ref={register({ required: true })} onChange={inputName} /></div>
               <div>{errors.login && errors.login.message}</div>
               <div>
-                <input className={classes.input} type="password" placeholder="Пароль" name="password" ref={register({ required: true })} required onChange={inputPassword} />
+                <input className={classes.input} type="password" placeholder="password" name="password" ref={register({ required: true })} required onChange={inputPassword} />
                 <div>{errors.password && errors.password.message}</div>
               </div>
               <Button
