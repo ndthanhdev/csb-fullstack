@@ -10,15 +10,15 @@ const httpServer = http.createServer(app);
 const { Server: SocketServer } = require('socket.io');
 
 const io = new SocketServer(httpServer);
+
+const peerIds = new Set();
+
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  setInterval(() => {
-    socket.emit('message', 'Hello from server');
-  }, 1000);
-
-  socket.on('message', (message) => {
-    console.log(message);
+  socket.on('peer-id', (peerId) => {
+    console.log('peer-id', peerId);
+    socket.broadcast.emit('user-connected', peerId);
   });
 
   socket.on('disconnect', () => {
@@ -26,7 +26,14 @@ io.on('connection', (socket) => {
   });
 });
 
-app.use(express.static('dist'));
+const { ExpressPeerServer } = require('peer');
+
+const peerServer = ExpressPeerServer(httpServer, {
+  debug: true
+});
+
+app.use('/peerjs', peerServer);
+// app.use(express.static('dist'));
 // app.use(express.json());
 
 // app.get('/api/getUsername', (req, res) =>
